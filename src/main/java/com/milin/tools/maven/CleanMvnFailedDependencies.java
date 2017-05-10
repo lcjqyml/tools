@@ -1,5 +1,6 @@
 package com.milin.tools.maven;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -10,8 +11,8 @@ import java.io.File;
 public class CleanMvnFailedDependencies {
 
     public static void main(String[] args) {
-        String m2Path = "";
-        if (StringUtils.isNotBlank(args[0])) {
+        String m2Path = "D:\\work\\program-install\\maven_re\\.m2\\repository";
+        if (ArrayUtils.isNotEmpty(args) && StringUtils.isNoneBlank(args[0])) {
             m2Path = args[0];
         }
         findAndDelete(new File(m2Path));
