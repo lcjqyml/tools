@@ -11,7 +11,7 @@ import java.io.File;
 public class CleanMvnFailedDependencies {
 
     public static void main(String[] args) {
-        String m2Path = "D:\\work\\program-install\\maven_re\\.m2\\repository";
+        String m2Path = "/path/to/your/local/rep";
         if (ArrayUtils.isNotEmpty(args) && StringUtils.isNoneBlank(args[0])) {
             m2Path = args[0];
         }
