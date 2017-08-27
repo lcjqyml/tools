@@ -11,32 +11,31 @@ import java.io.File;
 public class CleanMvnFailedDependencies {
 
     public static void main(String[] args) {
-        String m2Path = "/path/to/your/local/rep";
+        String m2Path = "/path/to/local/rep";
         if (ArrayUtils.isNotEmpty(args) && StringUtils.isNoneBlank(args[0])) {
             m2Path = args[0];
         }
         findAndDelete(new File(m2Path));
     }
 
-    private static boolean findAndDelete(File file) {
+    private static void findAndDelete(File file) {
         if (file.exists()) {
             if (file.isFile()) {
                 if (file.getName().endsWith("lastUpdated")) {
-                    deleteFile(file.getParentFile());
-                    return true;
+                    File downloadFile = new File(file.getAbsolutePath().replace(".lastUpdated", ""));
+                    if (!file.exists()) {
+                        deleteFile(file);
+                    }
                 }
             } else if (file.isDirectory()) {
                 File[] files = file.listFiles();
                 if (files != null) {
                     for (File f : files) {
-                        if (findAndDelete(f)) {
-                            break;
-                        }
+                        findAndDelete(f);
                     }
                 }
             }
         }
-        return false;
     }
 
     private static void deleteFile(File file) {
